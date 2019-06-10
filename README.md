@@ -20,11 +20,12 @@
 
 ## CSS
 ```css
-/* infinite grid reset */
+/* 이미지 높이 FOUC 대응 */
 .hwd_grid_lst .pd_unit .thmb{position:relative;display:block;padding-bottom:100%}
 .hwd_grid_lst .pd_unit .thmb:before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.03)}
 .hwd_grid_lst .pd_unit .thmb img{position:absolute;top:0;left:0;right:0;bottom:0;max-width:100%;max-height:100%;object-fit:cover}
 
+/* 로딩바 */
 .grid_loader{display:none}
 .grid_loader.on{display:block}
 .grid_loading{display:flex;justify-content:center;align-items:center;height:80px;overflow:hidden}
@@ -44,6 +45,9 @@
 ## JS
 ### import javascript files
 #### ssg.common.infinitegrid.js (범용적으로 사용)
+* 하우디 메인 NEW ARRIVALS
+* 모바일 특가매장 (오반장, 해바)
+
 ```html
 PC
 <script type="text/javascript" src="http://ui.ssgcdn.com/ui/ssg/js/ui/ssg.common.infinitegrid.js"></script>
@@ -53,6 +57,9 @@ MO
 
 
 #### ssg.view.infinitecategory.js (페이지 네비게이션 타입)
+* 공식스토어 메인 카테고리별 인기상품
+* 새벽배송 신선식탁
+
 ```html
 PC
 <script type="text/javascript" src="http://ui.ssgcdn.com/ui/ssg/js/ui/ssg.view.infinitecategory.js"></script>
@@ -62,6 +69,8 @@ MO
 
 
 #### ssg.view.infinitegrid.js (공통 상품유닛)
+* 모바일 대카테고리
+
 ```html
 MO
 <script type="text/javascript" src="http://ui.ssgcdn.com/ui/m_ssg/js/ui-renew/ssg.view.infinitegrid.js"></script>
