@@ -4,5 +4,5 @@
 
 # SSG - InfiniteGrid <small>1.0</small>
 
-[GitHub](https://github.com/hohoya33/)
+[GitHub](https://github.com/hohoya33/infinite-grid-guide)
 [Get Started](#시작하기)
