@@ -2,7 +2,7 @@
 
 ![logo](http://ui.ssgcdn.com/ui/company/img/common/ssg_logo_black.svg)
 
-# SSG - InfiniteGrid <small>1.0</small>
+# SSG-InfiniteGrid <small>1.0</small>
 
 [GitHub](https://github.com/hohoya33/infinite-grid-guide)
-[Get Started](#시작하기)
+[Get Started](#SSG-InfiniteGrid)

@@ -1,2 +1,3 @@
 <!-- docs/_sidebar.md -->
-* [무한 스크롤 가이드](/)
+* [시작하기](guide.md)
+* [코드리뷰](codereview.md)
