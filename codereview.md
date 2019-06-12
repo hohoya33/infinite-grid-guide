@@ -11,7 +11,7 @@ var oInfiniteGrid = new ssg.View.infiniteGrid({
     nEndPage: 30 // 마지막 데이터 페이지
     elGrid: '#_infinite_grid', // wrapper id
     elList: '>ul',
-    elItem: '>li',
+    elItems: '>li',
     elLoading: '.grid_loader',
     elFooter: '#mcom_footer',
     egOptions: {
@@ -21,7 +21,7 @@ var oInfiniteGrid = new ssg.View.infiniteGrid({
 });
 ```
 
-> 반복적으로 사용되는 DOM 캐싱, EventHandlers 등록
+> 반복적으로 사용되는 DOM 캐싱, 무한 스크롤 적용, EventHandlers 등록
 
 ```js
 init: function(){
@@ -31,10 +31,10 @@ init: function(){
 },
 _assignElements: function(){
     this._window = $(window);
-    this._welBody = $('body');
+    this._welHtmlBody = $('html,body');
     this._welGrid = $(this.elGrid);
     this._welGridList = this._welGrid.find(this.elList);
-    this._welGridItems = this._welGridList.find(this.elItem);
+    this._welGridItems = this._welGridList.find(this.elItems);
     this._welGridLoading = this._welGrid.find(this.elLoading);
     this._welFooter = $(this.elFooter);
 },
@@ -120,7 +120,7 @@ _onLayoutComplete: function(e){
 },
 ```
 
-> 처음 레이아웃 렌더링 시 기존 마크업 요소 복사 후 append
+> 처음 레이아웃 렌더링 시 기존 마크업 복사 후 append
 
 ```js
 firstRender: function(){
@@ -243,7 +243,7 @@ addItemList: function(aItemList){
 },
 ```
 
-> 데에터가 추가되고 레이아웃 배치가 완료 되면 IntersectionObserver 지원 여부에 따른 이미지 처리
+> 데이터가 DOM에 추가되고 레이아웃 배치가 완료 되면<br>IntersectionObserver 지원 여부에 따른 이미지 처리
 
 ```js
 _onLayoutComplete: function(e){
@@ -284,7 +284,7 @@ _loadImages: function(elem){
 
 ## 뒤로가기 이전 상태 유지
 
-> eg.Persist 객체 생성
+> 무한 스크롤 정보 저장을 위해 eg.Persist 객체 생성
 
 ```js
 _assignComponents: function(){
@@ -293,7 +293,7 @@ _assignComponents: function(){
 },
 ```
 
->  상품 클릭 시 (페이지 이동) 현재 데이터 담기
+>  상품 클릭 시 (페이지 이동) 현재 무한 스크롤 정보 담기
 
 ```js
 _attachEventHandlers: function() {
@@ -338,7 +338,7 @@ if (oInfinitePersist.get('') !== null) {
 }
 ```
 
-> 이전 레이아웃 데이터 복원
+> 이전 무한 스크롤 데이터 복원
 
 ```js
 historyBack: function(){
@@ -370,7 +370,7 @@ _onAppend: function(e){
 },
 
 ```
-> 레이아웃이 배치가 끝나면 dom complete 상태가 될때까지 기다린 후 이전 스크롤로 이동
+> 레이아웃이 배치가 끝나면 document complete 상태가 될때까지 대기하다가<br>이전 스크롤 위치로 이동
 
 ```js
 _onLayoutComplete: function(e){
@@ -379,7 +379,6 @@ _onLayoutComplete: function(e){
         this.isHistoryBack = false;
         this._delayRender().then(function(){
             this._welHtmlBody.animate({scrollTop: this.nCurScroll}, 250, function(){
-                console.log('scroll');
                 this.oGrid.layout(true);
             }.bind(this));
         }.bind(this));
@@ -388,18 +387,15 @@ _onLayoutComplete: function(e){
 },
 _delayRender: function(){
     var oSelf = this;
-    var fnInterval = null;
     return new Promise(function(resolve, reject) {
         if (document.readyState === 'complete') {
             resolve();
         } else {
-            fnInterval = setInterval(function() {
-                console.log(document.readyState);
+            document.onreadystatechange = function () {
                 if(document.readyState === 'complete') {
-                    clearInterval(fnInterval);
                     resolve();
                 }
-            }, 100);
+            };
         }
     }).then(function(){
         oSelf._welGrid.one('touchstart', function(){

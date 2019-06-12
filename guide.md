@@ -2,7 +2,7 @@
 ---
 
 ## HTML
-> 사용자가 로딩 없이 바로 볼 수 있도록 첫 페이지는 서버에서 그려줍니다. <br> id는 변경 가능하며 리스트 되는 부분에 data-page 속성을 추가 합니다.
+> 로딩 없이 바로 볼 수 있도록 첫 페이지는 서버에서 그려줍니다. <br> id는 변경 가능하며 리스트 부분에 data-page 속성을 추가 합니다.<br>마지막 부분에 로딩바를 추가합니다.
 
 ```html
 <div id="_infinite_grid">
@@ -20,12 +20,11 @@
 ```
 
 ## CSS
-> 이미지 FOUC 방지를 위해 높이를 지정이 필요합니다.
+> 이미지는 FOUC 방지를 위해 높이 지정이 필요합니다.<br>무한 스크롤이 적용될 아이템은 동일한 크기를 권장합니다.
 
 ```css
 /* 이미지 높이 FOUC 대응 */
 .hwd_grid_lst .pd_unit .thmb{position:relative;display:block;padding-bottom:100%}
-.hwd_grid_lst .pd_unit .thmb:before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.03)}
 .hwd_grid_lst .pd_unit .thmb img{position:absolute;top:0;left:0;right:0;bottom:0;max-width:100%;max-height:100%;object-fit:cover}
 
 /* 로딩바 */
@@ -47,10 +46,10 @@
 
 
 ## JS
-> SSG-InfiniteGrid를 적용하기 위해서 상황에 맞게 아래 스크립트 파일을 로드 합니다.
+> SSG-InfiniteGrid를 적용하기 위해 아래 스크립트 파일을 상황에 맞게 로드 합니다.
 
 #### ssg.common.infinitegrid.js
-> 다음 스크립트 파일은 범용적으로 사용 가능합니다.
+> 다음 스크립트 파일은 기본적인 무한 스크롤에서 사용 가능합니다.
 * 하우디 메인 NEW ARRIVALS
 * 모바일 특가매장 (오반장, 해바)
 
@@ -62,7 +61,7 @@ MO
 ```
 
 #### ssg.view.infinitecategory.js
-> 다음은 탭메뉴 형식의 UI 에서 무한 스크롤을 사용합니다.
+> 다음 스크립트 파일은 탭메뉴 형식의 UI 에서 무한 스크롤을 사용합니다.
 * 공식스토어 메인 카테고리별 인기상품
 * 새벽배송 신선식탁
 
@@ -75,7 +74,7 @@ MO
 
 
 #### ssg.view.infinitegrid.js
-> 공통 상품유닛 무한 스크롤 대응을 위해 사용합니다.
+> 다음 스크립트 파일은 모바일 공통 상품유닛 무한 스크롤 대응을 위해 사용합니다.
 * 모바일 대카테고리
 
 ```html
